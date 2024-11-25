@@ -38,9 +38,9 @@ public class student2 extends javax.swing.JInternalFrame {
     }
     // Phương thức kết nối cơ sở dữ liệu
     private Connection connect() throws Exception {
-        String url = "jdbc:mysql://localhost:3306/assjava3"; // Thay 'ten_database' bằng tên database
-        String user = "root"; // Thay username
-        String password = "18102007"; // Thay password
+        String url = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Thay 'ten_database' bằng tên database
+        String user = "yeumeent_TranHaiNam"; // Thay username
+        String password = "#lxQ5,=yA)Iu"; // Thay password
         return DriverManager.getConnection(url, user, password);
     }
     public JComboBox<String> getCboLop() {
@@ -65,7 +65,7 @@ public class student2 extends javax.swing.JInternalFrame {
 
     // Phương thức để trả về câu lệnh SELECT
     private String getSelectClassQuery() {
-        return "SELECT maLop FROM lophoc"; // Sửa câu lệnh này tùy thuộc vào cơ sở dữ liệu của bạn
+        return "SELECT maLop FROM LopHoc"; // Sửa câu lệnh này tùy thuộc vào cơ sở dữ liệu của bạn
     }
 
     
@@ -86,7 +86,7 @@ public class student2 extends javax.swing.JInternalFrame {
         }
     }
     private String getSelectSubjectCodeQuery() {
-        return "SELECT maMon FROM monhoc"; // Sửa câu lệnh này tùy thuộc vào cơ sở dữ liệu của bạn
+        return "SELECT maMon FROM MonHoc"; // Sửa câu lệnh này tùy thuộc vào cơ sở dữ liệu của bạn
     }
     // 
     public void addStudent2() {
@@ -192,7 +192,7 @@ public class student2 extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblSV.getModel();
         model.setRowCount(0); // Xóa dữ liệu hiện tại trên bảng
 
-        String query = "SELECT maSV, tenSV, maMon, gioiTinh, tuoi, maLop FROM sinhvien"; // Tùy chỉnh câu lệnh SELECT cho phù hợp với CSDL
+        String query = "SELECT maSV, tenSV, maMon, gioiTinh, tuoi, maLop FROM SinhVien"; // Tùy chỉnh câu lệnh SELECT cho phù hợp với CSDL
         try (Connection conn = connect(); // Kết nối CSDL
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {

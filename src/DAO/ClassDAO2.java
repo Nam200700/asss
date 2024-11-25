@@ -16,9 +16,9 @@ import java.util.List;
  * @author ACER
  */
 public class ClassDAO2 {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
-    private static final String USER = "root";
-    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
+    private static final String JDBC_URL = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String USER = "yeumeent_TranHaiNam";
+    private static final String PASSWORD = "#lxQ5,=yA)Iu"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {
@@ -35,7 +35,7 @@ public class ClassDAO2 {
 
     
     public static void insertDe(Class2 cl) {
-    String sql = "INSERT INTO lophoc (maLop,tenLop,moTa) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO LopHoc (maLop,tenLop,moTa) VALUES (?, ?, ?)";
     
     try (Connection conn = connection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -56,7 +56,7 @@ public class ClassDAO2 {
     }
 }
     public static void updateDe(Class2 cl) {
-    String sql = "UPDATE lophoc SET tenLop = ?, moTa = ? WHERE maLop = ?";
+    String sql = "UPDATE LopHoc SET tenLop = ?, moTa = ? WHERE maLop = ?";
     
     try (Connection conn = connection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -76,7 +76,7 @@ public class ClassDAO2 {
     }
 }
        public static void deleteDe(String malop) {
-    String sql = "DELETE FROM lophoc WHERE malop = ?";
+    String sql = "DELETE FROM LopHoc WHERE malop = ?";
     
     try (Connection conn = connection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -96,7 +96,7 @@ public class ClassDAO2 {
 } 
 public static List<Class2> getAllClasses() {
     List<Class2> classes = new ArrayList<>();
-    String sql = "SELECT maLop, tenLop, moTa FROM lophoc";
+    String sql = "SELECT maLop, tenLop, moTa FROM LopHoc";
 
     try (Connection conn = connection();
          PreparedStatement pstmt = conn.prepareStatement(sql);

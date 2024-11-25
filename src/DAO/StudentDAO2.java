@@ -14,9 +14,9 @@ import java.sql.ResultSet;
  * @author ACER
  */
 public class StudentDAO2 {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
-    private static final String USER = "root";
-    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
+    private static final String JDBC_URL = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String USER = "yeumeent_TranHaiNam";
+    private static final String PASSWORD = "#lxQ5,=yA)Iu"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {
@@ -34,7 +34,7 @@ public class StudentDAO2 {
 
     // Phương thức thêm sinh viên
     public boolean addStudent(Student2 student) {
-        String sql = "INSERT INTO sinhvien (maSV, tenSV,maLop, maMon,gioiTinh, tuoi) VALUES (?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO SinhVien (maSV, tenSV,maLop, maMon,gioiTinh, tuoi) VALUES (?, ?, ?, ?, ?,?)";
 
        if (student.getMasinhvien().isEmpty() || 
             student.getTensinhvien().isEmpty() || 
@@ -81,7 +81,7 @@ public boolean updateStudent(Student2 student) {
         return false;
     }
 
-    String sql = "UPDATE sinhvien SET tenSV = ?, maMon = ?, maLop = ?, gioiTinh = ?, tuoi = ? WHERE maSV = ?";
+    String sql = "UPDATE SinhVien SET tenSV = ?, maMon = ?, maLop = ?, gioiTinh = ?, tuoi = ? WHERE maSV = ?";
     try (Connection conn = connection(); PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setString(1, student.getTensinhvien());
         ps.setString(2, student.getMamon());
@@ -98,7 +98,7 @@ public boolean updateStudent(Student2 student) {
 }
 // đếm xem có bao nhiêu mã lớp để xét điều kiện 
 public boolean isMaLopExist(String maLop) {
-        String sql = "SELECT COUNT(*) FROM lophoc WHERE maLop = ?";
+        String sql = "SELECT COUNT(*) FROM LopHoc WHERE maLop = ?";
         try (Connection conn = connection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, maLop);
             ResultSet rs = ps.executeQuery();
@@ -110,7 +110,7 @@ public boolean isMaLopExist(String maLop) {
     }
 // Kiểm tra sinh viên có tồn tại không
     public boolean checkStudentExists(String maSV) {
-        String sql = "SELECT COUNT(*) FROM sinhvien WHERE maSV = ?";
+        String sql = "SELECT COUNT(*) FROM SinhVien WHERE maSV = ?";
         try (Connection conn = connection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, maSV);
@@ -124,7 +124,7 @@ public boolean isMaLopExist(String maLop) {
     }
 
   public static void deleteDe(String maSinhVien) {
-    String sql = "DELETE FROM sinhvien WHERE maSV = ?";
+    String sql = "DELETE FROM SinhVien WHERE maSV = ?";
     
     try (Connection conn = connection();
          PreparedStatement pstmt = conn.prepareStatement(sql)) {

@@ -18,9 +18,9 @@ import java.util.List;
  * @author ACER
  */
 public class SubjectDAO2 {
-   private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
-    private static final String USER = "root";
-    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
+   private static final String JDBC_URL = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String USER = "yeumeent_TranHaiNam";
+    private static final String PASSWORD = "#lxQ5,=yA)Iu"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {
@@ -36,7 +36,7 @@ public class SubjectDAO2 {
     }
 
     public static void insertSub(Subject2 sb) {
-        String sql = "INSERT INTO monhoc (maMon, tenMon, moTa, diemQuaMon) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO MonHoc (maMon, tenMon, moTa, diemQuaMon) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -58,7 +58,7 @@ public class SubjectDAO2 {
     }
 
     public static void updateSub(Subject2 sb) {
-        String sql = "UPDATE monhoc SET tenMon = ?, moTa = ?, diemQuaMon = ? WHERE maMon = ?";
+        String sql = "UPDATE MonHoc SET tenMon = ?, moTa = ?, diemQuaMon = ? WHERE maMon = ?";
 
         try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -80,7 +80,7 @@ public class SubjectDAO2 {
     }
 
     public static void deleteSub(String mamon) {
-        String sql = "DELETE FROM monhoc WHERE maMon = ?";
+        String sql = "DELETE FROM MonHoc WHERE maMon = ?";
 
         try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -100,7 +100,7 @@ public class SubjectDAO2 {
     // lấy dữ liệu từ database lên 
     public static List<Subject2> getAllSubject() {
         List<Subject2> sub = new ArrayList<>();
-        String sql = "SELECT maMon, tenMon, moTa, diemQuaMon FROM monhoc";
+        String sql = "SELECT maMon, tenMon, moTa, diemQuaMon FROM MonHoc";
 
         try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(sql);

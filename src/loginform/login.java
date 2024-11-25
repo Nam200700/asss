@@ -289,7 +289,7 @@ public class login extends javax.swing.JFrame {
         ResultSet rs = null; 
 
         try { 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/assjava3", "root", "18102007"); 
+            conn = DriverManager.getConnection("jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247", "yeumeent_TranHaiNam", "#lxQ5,=yA)Iu"); 
             // Câu lệnh SQL để kiểm tra tên đăng nhập và mật khẩu
             String sql = "SELECT * FROM users WHERE full_name = ? AND password = ?"; 
             stmt = conn.prepareStatement(sql); 
