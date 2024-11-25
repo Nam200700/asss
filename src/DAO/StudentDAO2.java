@@ -14,9 +14,9 @@ import java.sql.ResultSet;
  * @author ACER
  */
 public class StudentDAO2 {
-    private static final String JDBC_URL = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Đổi theo cơ sở dữ liệu của bạn
-    private static final String USER = "yeumeent_TranHaiNam";
-    private static final String PASSWORD = "#lxQ5,=yA)Iu"; // Đổi mật khẩu của bạn nếu cần
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String USER = "root";
+    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {

@@ -38,9 +38,9 @@ public class student2 extends javax.swing.JInternalFrame {
     }
     // Phương thức kết nối cơ sở dữ liệu
     private Connection connect() throws Exception {
-        String url = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Thay 'ten_database' bằng tên database
-        String user = "yeumeent_TranHaiNam"; // Thay username
-        String password = "#lxQ5,=yA)Iu"; // Thay password
+        String url = "jdbc:mysql://localhost:3306/assjava3"; // Thay 'ten_database' bằng tên database
+        String user = "root"; // Thay username
+        String password = "18102007"; // Thay password
         return DriverManager.getConnection(url, user, password);
     }
     public JComboBox<String> getCboLop() {
@@ -124,9 +124,9 @@ public class student2 extends javax.swing.JInternalFrame {
         String maSV = txtMaSV.getText();
         String tenSV = txtTenSV.getText();
         String maMon = (String) cboMon.getSelectedItem();
-        String malop = (String) cboLop.getSelectedItem();
         boolean gioiTinh = rdbNam.isSelected(); // Nam: true, Nữ: false
         int tuoi = Integer.parseInt(txtTuoi.getText());
+        String malop = (String) cboLop.getSelectedItem();
 
         // Kiểm tra mã sinh viên có trùng hay không
         StudentDAO2 dao = new StudentDAO2();
@@ -136,7 +136,7 @@ public class student2 extends javax.swing.JInternalFrame {
         }
 
         // Tạo đối tượng Student2
-        Student2 student = new Student2(maSV, tenSV, malop, maMon, gioiTinh, tuoi);
+        Student2 student = new Student2(maSV, tenSV,  maMon, gioiTinh, tuoi ,malop);
 
         // Gọi phương thức addStudent để thêm sinh viên vào cơ sở dữ liệu
         boolean result = dao.addStudent(student);
@@ -209,10 +209,10 @@ public class student2 extends javax.swing.JInternalFrame {
                 model.addRow(new Object[]{
                     maSV,
                     tenSV,
-                    malop,
                     maMon,
                     gioiTinh ? "Nam" : "Nữ", // Hiển thị Nam hoặc Nữ
-                    tuoi,     
+                    tuoi, 
+                    malop
                 });
             }
         } catch (SQLException e) {
@@ -238,11 +238,11 @@ public class student2 extends javax.swing.JInternalFrame {
             txtMaSV.setText(tblSV.getValueAt(selectedRow, 0).toString());
             txtTenSV.setText(tblSV.getValueAt(selectedRow, 1).toString());
             cboMon.setSelectedItem(tblSV.getValueAt(selectedRow, 2).toString());
-            cboLop.setSelectedItem(tblSV.getValueAt(selectedRow, 3).toString());
-            boolean isNam = tblSV.getValueAt(selectedRow, 4).toString().equals("Nam");
+            cboLop.setSelectedItem(tblSV.getValueAt(selectedRow, 5).toString());
+            boolean isNam = tblSV.getValueAt(selectedRow, 3).toString().equals("Nam");
             rdbNam.setSelected(isNam);
             rdbNu.setSelected(!isNam);
-            txtTuoi.setText(tblSV.getValueAt(selectedRow, 5).toString());
+            txtTuoi.setText(tblSV.getValueAt(selectedRow, 4).toString());
         }
     }
     public void removeStudent() {

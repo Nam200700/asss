@@ -11,18 +11,19 @@ package Model;
 public class Student2 {
     public String masinhvien;
     public String tensinhvien;
-    public String malop;
     public String mamon;
     public  boolean gioitinh;
     public int tuoi;
+    public String malop;
 
-    public Student2(String masinhvien, String tensinhvien, String malop, String mamon,boolean gioitinh, int tuoi) {
+
+    public Student2(String masinhvien, String tensinhvien, String mamon,boolean gioitinh, int tuoi,  String malop) {
         this.masinhvien = masinhvien;
         this.tensinhvien = tensinhvien;
-        this.malop = malop;
         this.mamon = mamon;
         this.gioitinh = gioitinh;
         this.tuoi = tuoi;
+        this.malop = malop;
     }
     public Student2(){
         
@@ -36,9 +37,6 @@ public class Student2 {
         return tensinhvien;
     }
 
-    public String getMalop() {
-        return malop;
-    }
 
     public String getMamon() {
         return mamon;
@@ -51,6 +49,9 @@ public class Student2 {
     public int getTuoi() {
         return tuoi;
     }
+    public String getMalop() {
+        return malop;
+    }
 
     public void setMasinhvien(String masinhvien) {
         this.masinhvien = masinhvien;
@@ -58,10 +59,6 @@ public class Student2 {
 
     public void setTensinhvien(String tensinhvien) {
         this.tensinhvien = tensinhvien;
-    }
-
-    public void setMalop(String malop) {
-        this.malop = malop;
     }
 
     public void setMamon(String mamon) {
@@ -75,4 +72,8 @@ public class Student2 {
     public void setTuoi(int tuoi) {
         this.tuoi = tuoi;
     }
+     public void setMalop(String malop) {
+        this.malop = malop;
+    }
+
 }

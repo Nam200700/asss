@@ -12,15 +12,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ACER
  */
 public class SubjectDAO2 {
-   private static final String JDBC_URL = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Đổi theo cơ sở dữ liệu của bạn
-    private static final String USER = "yeumeent_TranHaiNam";
-    private static final String PASSWORD = "#lxQ5,=yA)Iu"; // Đổi mật khẩu của bạn nếu cần
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String USER = "root";
+    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {
@@ -79,7 +80,7 @@ public class SubjectDAO2 {
         }
     }
 
-    public static void deleteSub(String mamon) {
+    public static boolean deleteSub(String mamon) {
         String sql = "DELETE FROM MonHoc WHERE maMon = ?";
 
         try (Connection conn = connection();
@@ -87,14 +88,17 @@ public class SubjectDAO2 {
             
             pstmt.setString(1, mamon);  // Đặt giá trị maMon cần xóa
             int affectedRows = pstmt.executeUpdate();  // Thực hiện câu lệnh DELETE
-
-            if (affectedRows > 0) {
-                System.out.println("Xóa môn học thành công!");
-            } else {
-                System.out.println("Không tìm thấy môn học để xóa!");
-            }
-        } catch (SQLException e) {
-            System.err.println("SQL Exception: " + e.getMessage());
+            
+            return affectedRows > 0;
+            } catch (SQLException e) {
+                if ("2300".equals(e.getSQLState())) {
+                    System.out.println("Lỗi khóa ngoại :Không thể xóa môn học vì còn dữ liệu liên quan!");
+                    
+                }else{
+                     System.err.println("SQL Exception: " + e.getMessage());
+                }
+             
+           return false;
         }
     }
     // lấy dữ liệu từ database lên 

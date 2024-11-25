@@ -9,6 +9,7 @@ import DAO.ClassDAO2;
 import DAO.SubjectDAO2;
 import Model.Class2;
 import Model.Subject2;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -97,66 +98,66 @@ public class subject2 extends javax.swing.JInternalFrame {
 }
 
     public void updateSubject() {
-    int index = btnTableMonhoc.getSelectedRow(); // Lấy dòng được chọn từ bảng
+        int index = btnTableMonhoc.getSelectedRow(); // Lấy dòng được chọn từ bảng
 
-    if (index == -1 || index >= mon.size()) { // Kiểm tra dòng hợp lệ
-        JOptionPane.showMessageDialog(this, "Chưa chọn hàng nào để cập nhật!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (index == -1 || index >= mon.size()) { // Kiểm tra dòng hợp lệ
+            JOptionPane.showMessageDialog(this, "Chưa chọn hàng nào để cập nhật!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // Kiểm tra nếu chưa nhập mã môn học và tên môn học
-    if (txtma.getText().equals("") && txtten.getText().equals("")) {
-        JOptionPane.showMessageDialog(this, "Chưa nhập tên và mã môn học", "Error", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        // Kiểm tra nếu chưa nhập mã môn học và tên môn học
+        if (txtma.getText().equals("") && txtten.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập tên và mã môn học", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // Kiểm tra nếu chưa nhập tên môn học
-    if (txtten.getText().equals("")) {
-        JOptionPane.showMessageDialog(this, "Chưa nhập tên môn học", "Error", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        // Kiểm tra nếu chưa nhập tên môn học
+        if (txtten.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập tên môn học", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // Kiểm tra nếu chưa nhập mã môn học
-    if (txtma.getText().equals("")) {
-        JOptionPane.showMessageDialog(this, "Chưa nhập mã môn học", "Error", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        // Kiểm tra nếu chưa nhập mã môn học
+        if (txtma.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập mã môn học", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    // Kiểm tra nếu chưa nhập điểm qua môn
-    if (txtquamon.getText().equals("")) {
-        JOptionPane.showMessageDialog(this, "Chưa nhập điểm qua môn", "Error", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        // Kiểm tra nếu chưa nhập điểm qua môn
+        if (txtquamon.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập điểm qua môn", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    try {
-        // Lấy giá trị điểm qua môn và chuyển đổi thành float
-        float diemQuaMon = Float.parseFloat(txtquamon.getText());
+        try {
+            // Lấy giá trị điểm qua môn và chuyển đổi thành float
+            float diemQuaMon = Float.parseFloat(txtquamon.getText());
 
-        Subject2 dp = mon.get(index);  // Lấy môn học hiện tại từ danh sách
-        dp.setMamon(txtma.getText());
-        dp.setTenmon(txtten.getText());
-        dp.setMota(txtmota.getText());
-        dp.setDiemQuaMon(diemQuaMon);  // Cập nhật điểm qua môn
+            Subject2 dp = mon.get(index);  // Lấy môn học hiện tại từ danh sách
+            dp.setMamon(txtma.getText());
+            dp.setTenmon(txtten.getText());
+            dp.setMota(txtmota.getText());
+            dp.setDiemQuaMon(diemQuaMon);  // Cập nhật điểm qua môn
 
-        // Cập nhật lại combobox
-//        st.getCboMon().removeItemAt(index);
-//        st.getCboMon().insertItemAt(dp.getTenmon(), index);
-//        st.getCboMon().revalidate();
-//        st.getCboMon().repaint();
-//
-//        // Cập nhật môn học vào cơ sở dữ liệu
-           SubjectDAO2.updateSub(dp);
+            // Cập nhật lại combobox
+    //        st.getCboMon().removeItemAt(index);
+    //        st.getCboMon().insertItemAt(dp.getTenmon(), index);
+    //        st.getCboMon().revalidate();
+    //        st.getCboMon().repaint();
+    //
+    //        // Cập nhật môn học vào cơ sở dữ liệu
+            SubjectDAO2.updateSub(dp);
 
-        // Cập nhật lại bảng
-        fillTable();
+            // Cập nhật lại bảng
+            fillTable();
 
-        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Điểm qua môn phải là số hợp lệ!", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật môn học: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Điểm qua môn phải là số hợp lệ!", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật môn học: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 }
 
 public void removeSubject() {
@@ -171,20 +172,32 @@ public void removeSubject() {
                 String mamon = (String) btnTableMonhoc.getValueAt(index, 0);
 
                 // Xóa môn học khỏi cơ sở dữ liệu
-                SubjectDAO2.deleteSub(mamon);
+                boolean isDeleted = SubjectDAO2.deleteSub(mamon); // Trả về true nếu xóa thành công, false nếu không
 
-                // Xóa môn học khỏi danh sách `mon` dựa vào mã môn
-                for (int i = 0; i < mon.size(); i++) {
-                    if (mon.get(i).getMamon().equals(mamon)) {
-                        mon.remove(i);
-                        break;
+                if (isDeleted) {
+                    // Xóa môn học khỏi danh sách `mon` dựa vào mã môn
+                    for (int i = 0; i < mon.size(); i++) {
+                        if (mon.get(i).getMamon().equals(mamon)) {
+                            mon.remove(i);
+                            break;
+                        }
                     }
+
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    
+                    if(btnTableMonhoc.getRowCount()>0){ // kiểm tra còn dữ liệu trong bảng ko
+                        int newindex = Math.min(index, btnTableMonhoc.getRowCount()-1); // lấy dòng gần nhất
+                        btnTableMonhoc.setRowSelectionInterval(newindex, newindex); // CHọn dòng mới
+                        loadROwindexfield(newindex); // đưa dữ liệu dòng lên các field
+                    }else{
+                        clean();
+                    }
+                    
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa môn học do ràng buộc dữ liệu (foreign key).", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
-
-                
-                fillTable();
-
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Lỗi khi xóa môn học: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
@@ -192,6 +205,18 @@ public void removeSubject() {
     } else {
         JOptionPane.showMessageDialog(this, "Chưa chọn hàng nào để xóa hoặc dữ liệu không hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
+}
+public void loadROwindexfield(int newrowintdex){
+    String mamon = (String) btnTableMonhoc.getValueAt(newrowintdex, 0);
+    String tenmon = (String) btnTableMonhoc.getValueAt(newrowintdex, 1);
+    String mota = (String) btnTableMonhoc.getValueAt(newrowintdex, 2);
+    Float diemquamon = (Float) btnTableMonhoc.getValueAt(newrowintdex, 3);
+    
+    txtma.setText(mamon);
+    txtten.setText(tenmon);
+    txtmota.setText(mota);
+    txtquamon.setText(diemquamon != null ? diemquamon.toString() : ""); // Chuyển Float thành String
+
 }
 
   public void fillTable() {
@@ -209,12 +234,14 @@ public void removeSubject() {
         model.addRow(row); // Thêm dữ liệu vào bảng
     }
 
-    // Cập nhật combobox (nếu cần)
+
+}
+     // Cập nhật combobox (nếu cần)
 //    st.getCboLop().removeAllItems();
 //    for (Subject2 dp : lop) {
 //        st.getCboLop().addItem(dp.tenlop);
-//    }
-}
+//    } 
+  
     public void clickHere() {
     int row = btnTableMonhoc.getSelectedRow();  // Lấy chỉ số dòng được chọn
 
@@ -233,6 +260,12 @@ public void removeSubject() {
         txtquamon.setText(diemQuaMon);  // Cập nhật điểm qua môn
     }
 }
+    public void clean(){
+        txtma.setText("");
+        txtten.setText("");
+        txtmota.setText("");
+        txtquamon.setText("");
+    }
 
 
 
@@ -430,11 +463,7 @@ public void removeSubject() {
     }//GEN-LAST:event_btnTableMonhocMouseClicked
 
     private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
-       txtma.setText("");
-       txtten.setText("");
-       txtmota.setText("");
-       txtquamon.setText("");
-        
+       clean();
     }//GEN-LAST:event_btnresetActionPerformed
 
 

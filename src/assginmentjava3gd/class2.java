@@ -115,31 +115,66 @@ public class class2 extends javax.swing.JInternalFrame {
         fillTable();
         JOptionPane.showMessageDialog(this, "Cập nhật thành công");
 }
-    public void removeclass() {
-        int index = btnTablelop.getSelectedRow(); // Lấy dòng được chọn từ bảng
+public void removeclass() {
+    int index = btnTablelop.getSelectedRow(); // Lấy dòng được chọn từ bảng
 
-        if (index != -1 && index < lop.size()) { // Kiểm tra dòng hợp lệ
-            int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa lớp học này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+    if (index != -1) { // Kiểm tra dòng hợp lệ
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa môn học này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
 
-            if (choice == JOptionPane.YES_OPTION) {
-                // Lấy lớp học cần xóa từ danh sách
-                Class2 dp = lop.get(index);
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                // Lấy mã môn học từ bảng
+                String maLop = (String) btnTablelop.getValueAt(index, 0);
 
-                // Xóa lớp học khỏi cơ sở dữ liệu
-                ClassDAO2.deleteDe(dp.getMalop());
+                // Xóa môn học khỏi cơ sở dữ liệu
+                boolean isDeleted = ClassDAO2.deleteSub(maLop); // Trả về true nếu xóa thành công, false nếu không
 
-                // Xóa lớp học khỏi danh sách `lop` và combobox
-                lop.remove(index);
-                st.getCboLop().removeItemAt(index);
+                if (isDeleted) {
+                    // Xóa môn học khỏi danh sách `mon` dựa vào mã môn
+                    for (int i = 0; i < lop.size(); i++) {
+                        if (lop.get(i).getMalop().equals(maLop)) {
+                            lop.remove(i);
+                            break;
+                        }
+                    }
 
-                // Cập nhật lại bảng và giao diện
-                fillTable();
-
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    
+                    if(btnTablelop.getRowCount()>0){ // kiểm tra còn dữ liệu trong bảng ko
+                        int newindex = Math.min(index, btnTablelop.getRowCount()-1); // lấy dòng gần nhất
+                        btnTablelop.setRowSelectionInterval(newindex, newindex); // CHọn dòng mới
+                        loadRowindexfield(newindex); // đưa dữ liệu dòng lên các field
+                    }else{
+                        clean();
+                    }
+                    
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa môn học do ràng buộc dữ liệu (foreign key).", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi xóa môn học: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Chưa chọn hàng nào để xóa hoặc dữ liệu không hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Chưa chọn hàng nào để xóa hoặc dữ liệu không hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+    }
+}
+    public void clean(){
+        txtTen.setText("");
+        txtMa.setText("");
+        txtMota.setText("");
+}
+    public void loadRowindexfield(int newrowintdex){
+        String maLop = (String) btnTablelop.getValueAt(newrowintdex, 0);
+        String tenLop = (String) btnTablelop.getValueAt(newrowintdex, 1);
+        String mota = (String) btnTablelop.getValueAt(newrowintdex, 2);
+
+        txtMa.setText(maLop);
+        txtTen.setText(tenLop);
+        txtMota.setText(mota);
+
 }
     
     
@@ -366,9 +401,7 @@ public class class2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnTablelopMouseClicked
 
     private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
-        txtTen.setText("");
-        txtMa.setText("");
-        txtMota.setText("");
+        clean();
     }//GEN-LAST:event_btnresetActionPerformed
 
 

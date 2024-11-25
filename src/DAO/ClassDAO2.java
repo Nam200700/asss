@@ -16,9 +16,9 @@ import java.util.List;
  * @author ACER
  */
 public class ClassDAO2 {
-    private static final String JDBC_URL = "jdbc:mysql://yeume-enterprise.edu.vn:3306/yeumeent_THN_nhom247"; // Đổi theo cơ sở dữ liệu của bạn
-    private static final String USER = "yeumeent_TranHaiNam";
-    private static final String PASSWORD = "#lxQ5,=yA)Iu"; // Đổi mật khẩu của bạn nếu cần
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String USER = "root";
+    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {
@@ -74,26 +74,28 @@ public class ClassDAO2 {
         System.err.println("Lỗi khi cập nhật thông tin lớp học: " + e.getMessage());
         e.printStackTrace();
     }
-}
-       public static void deleteDe(String malop) {
-    String sql = "DELETE FROM LopHoc WHERE malop = ?";
-    
-    try (Connection conn = connection();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-        pstmt.setString(1, malop); // Đặt giá trị tên sinh viên cần xóa
-        int affectedRows = pstmt.executeUpdate(); // Thực hiện câu lệnh DELETE
-        
-        if (affectedRows > 0) {
-            System.out.println("Xóa lớp thành công!");
-        } else {
-            System.out.println("Không tìm thấy lớp để xóa!");
-        }
+}       
+    public static boolean deleteSub(String malop) {
+        String sql = "DELETE FROM LopHoc WHERE malop = ?";
 
-    } catch (SQLException e) {
-        System.err.println("SQL Exception: " + e.getMessage());
+        try (Connection conn = connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, malop);  // Đặt giá trị maLop cần xóa
+            int affectedRows = pstmt.executeUpdate();  // Thực hiện câu lệnh DELETE
+            
+            return affectedRows > 0;
+            } catch (SQLException e) {
+                if ("2300".equals(e.getSQLState())) {
+                    System.out.println("Lỗi khóa ngoại :Không thể xóa môn học vì còn dữ liệu liên quan!");
+                    
+                }else{
+                     System.err.println("SQL Exception: " + e.getMessage());
+                }
+             
+           return false;
+        }
     }
-} 
 public static List<Class2> getAllClasses() {
     List<Class2> classes = new ArrayList<>();
     String sql = "SELECT maLop, tenLop, moTa FROM LopHoc";
