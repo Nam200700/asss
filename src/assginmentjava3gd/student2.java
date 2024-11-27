@@ -253,32 +253,83 @@ public class student2 extends javax.swing.JInternalFrame {
 
         if (choice == JOptionPane.YES_OPTION) {
             try {
-                // Lấy mã sinh viên từ bảng
-                String maSinhVien = (String) tblSV.getValueAt(index, 0); // Cột chứa `maSV`
+                // Lấy mã sinh vien học từ bảng
+                String masinhvien = (String) tblSV.getValueAt(index, 0);
 
-                // Xóa sinh viên khỏi cơ sở dữ liệu
-                StudentDAO2.deleteDe(maSinhVien);
+                // Xóa môn học khỏi cơ sở dữ liệu
+                boolean isDeleted = StudentDAO2.deleteST(masinhvien);// Trả về true nếu xóa thành công, false nếu không
 
-                // Xóa sinh viên khỏi danh sách tạm thời (nếu có)
-                for (int i = 0; i < sinhvien.size(); i++) {
-                    if (sinhvien.get(i).getMasinhvien().equals(maSinhVien)) {
-                        sinhvien.remove(i);
-                        break;
+                if (isDeleted) {
+                    // Xóa môn học khỏi danh sách `sinhvien` dựa vào mã sinh vien
+                    for (int i = 0; i < sinhvien.size(); i++) {
+                        if (sinhvien.get(i).getMamon().equals(masinhvien)) {
+                            sinhvien.remove(i);
+                            break;
+                        }
                     }
+
+                    fillToTable();
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    
+                    if(tblSV.getRowCount()>0){ // kiểm tra còn dữ liệu trong bảng ko
+                        int newindex = Math.min(index, tblSV.getRowCount()-1); // lấy dòng gần nhất
+                        tblSV.setRowSelectionInterval(newindex, newindex); // CHọn dòng mới
+                        loadROwindexfield(newindex); // đưa dữ liệu dòng lên các field
+                    }else{
+                        cleans();
+                    }
+                    
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không thể xóa sinh viên do ràng buộc dữ liệu (foreign key).", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
-
-                // Cập nhật lại bảng sau khi xóa
-                fillToTable();
-
-                JOptionPane.showMessageDialog(this, "Xóa sinh viên thành công!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Lỗi khi xóa sinh viên: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Lỗi khi xóa sinh viên : " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
     } else {
         JOptionPane.showMessageDialog(this, "Chưa chọn hàng nào để xóa hoặc dữ liệu không hợp lệ!", "Thông báo", JOptionPane.WARNING_MESSAGE);
     }
 }
+
+    public void loadROwindexfield(int newrowintdex) {
+        try {
+            String masinhvien = tblSV.getValueAt(newrowintdex, 0).toString();
+            String tensinhvien = tblSV.getValueAt(newrowintdex, 1).toString();
+            String mamon = tblSV.getValueAt(newrowintdex, 2).toString();
+            String gioitinh = tblSV.getValueAt(newrowintdex, 3).toString();
+            int tuoi = (Integer) tblSV.getValueAt(newrowintdex, 4); // Tuổi là Integer
+            String lop = tblSV.getValueAt(newrowintdex, 5).toString();
+
+            txtMaSV.setText(masinhvien);
+            txtTenSV.setText(tensinhvien);
+            cboMon.setSelectedItem(mamon);
+            txtTuoi.setText(String.valueOf(tuoi)); // Chuyển đổi từ Integer sang String
+            cboLop.setSelectedItem(lop);
+
+            // Chọn đúng radio button cho giới tính
+            if (gioitinh.equalsIgnoreCase("Nam")) {
+                rdbNam.setSelected(true);
+            } else {
+                rdbNu.setSelected(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi tải dữ liệu sinh viên: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+   
+   public void cleans() {
+        txtMaSV.setText("");
+        txtTenSV.setText("");
+        txtTuoi.setText("");
+        cboMon.setSelectedIndex(-1); // Reset ComboBox
+        cboLop.setSelectedIndex(-1);
+        buttonGroup1.clearSelection(); // Bỏ chọn radio button
+        JOptionPane.showMessageDialog(this, "Đã làm mới!");
+    }
+
+    
 
     
     
@@ -520,11 +571,7 @@ public class student2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
-        txtMaSV.setText("");
-        txtTenSV.setText("");
-        txtTuoi.setText("");
-        buttonGroup1.clearSelection();
-        JOptionPane.showMessageDialog(this,"Đã làm mới!!");
+        cleans();
     }//GEN-LAST:event_btnresetActionPerformed
 
 

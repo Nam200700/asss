@@ -122,24 +122,25 @@ public boolean isMaLopExist(String maLop) {
         }
         return false; // Không tồn tại hoặc lỗi
     }
+  public static boolean deleteST(String maSinhVien) {
+        String sql = "DELETE FROM SinhVien WHERE maSV = ?";
 
-  public static void deleteDe(String maSinhVien) {
-    String sql = "DELETE FROM SinhVien WHERE maSV = ?";
-    
-    try (Connection conn = connection();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        
-        pstmt.setString(1, maSinhVien); // Đặt giá trị mã sinh viên cần xóa
-        int affectedRows = pstmt.executeUpdate(); // Thực hiện câu lệnh DELETE
-        
-        if (affectedRows > 0) {
-            System.out.println("Xóa sinh viên thành công!");
-        } else {
-            System.out.println("Không tìm thấy sinh viên để xóa!");
+        try (Connection conn = connection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, maSinhVien);  // Đặt giá trị maMon cần xóa
+            int affectedRows = pstmt.executeUpdate();  // Thực hiện câu lệnh DELETE
+            
+            return affectedRows > 0;
+            } catch (SQLException e) {
+                if ("2300".equals(e.getSQLState())) {
+                    System.out.println("Lỗi khóa ngoại :Không thể xóa môn học vì còn dữ liệu liên quan!");
+                    
+                }else{
+                     System.err.println("SQL Exception: " + e.getMessage());
+                }
+             
+           return false;
         }
-
-    } catch (SQLException e) {
-        System.err.println("SQL Exception: " + e.getMessage());
     }
-}
 }
