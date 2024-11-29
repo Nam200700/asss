@@ -12,16 +12,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author ACER
  */
 public class SubjectDAO2 {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/assjava3"; // Đổi theo cơ sở dữ liệu của bạn
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/qlsv"; // Đổi theo cơ sở dữ liệu của bạn
     private static final String USER = "root";
-    private static final String PASSWORD = "18102007"; // Đổi mật khẩu của bạn nếu cần
+    private static final String PASSWORD = "tranhainam123"; // Đổi mật khẩu của bạn nếu cần
 
     static {
         try {

@@ -4,6 +4,12 @@
  */
 package Model;
 
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author ACER
@@ -15,6 +21,7 @@ public class Student2 {
     public  boolean gioitinh;
     public int tuoi;
     public String malop;
+    public String tenlop;
 
 
     public Student2(String masinhvien, String tensinhvien, String mamon,boolean gioitinh, int tuoi,  String malop) {
@@ -25,6 +32,7 @@ public class Student2 {
         this.tuoi = tuoi;
         this.malop = malop;
     }
+    
     public Student2(){
         
     }
@@ -74,6 +82,14 @@ public class Student2 {
     }
      public void setMalop(String malop) {
         this.malop = malop;
+    }
+
+    public String getTenlop() {
+        return tenlop;
+    }
+
+    public void setTenlop(String tenlop) {
+        this.tenlop = tenlop;
     }
 
 }

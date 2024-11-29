@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-;
+import Excel.StudentExcel;
 /**
  *
  * @author ACER
@@ -38,9 +38,9 @@ public class student2 extends javax.swing.JInternalFrame {
     }
     // Phương thức kết nối cơ sở dữ liệu
     private Connection connect() throws Exception {
-        String url = "jdbc:mysql://localhost:3306/assjava3"; // Thay 'ten_database' bằng tên database
+        String url = "jdbc:mysql://localhost:3306/qlsv"; // Thay 'ten_database' bằng tên database
         String user = "root"; // Thay username
-        String password = "18102007"; // Thay password
+        String password = "tranhainam123"; // Thay password
         return DriverManager.getConnection(url, user, password);
     }
     public JComboBox<String> getCboLop() {
@@ -551,7 +551,7 @@ public class student2 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+       StudentExcel.exportToExcel(tblSV);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed

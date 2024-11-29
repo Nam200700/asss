@@ -4,8 +4,8 @@
  */
 package assginmentjava3gd;
 
+import Excel.PointExcel;
 import DAO.PointDAO2;
-import static DAO.PointDAO2.connection;
 import Model.Point2;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -41,9 +41,9 @@ public class point2 extends javax.swing.JInternalFrame {
     // đẩy dữ liệu từ database lên combobox
     // Phương thức kết nối cơ sở dữ liệu
     private Connection connect() throws Exception {
-        String url = "jdbc:mysql://localhost:3306/assjava3"; // Thay 'ten_database' bằng tên database
+        String url = "jdbc:mysql://localhost:3306/qlsv"; // Thay 'ten_database' bằng tên database
         String user = "root"; // Thay username
-        String password = "18102007"; // Thay password
+        String password = "tranhainam123"; // Thay password
         return DriverManager.getConnection(url, user, password);
     }
     
@@ -437,6 +437,11 @@ public class point2 extends javax.swing.JInternalFrame {
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/6296676_excel_microsoft_office_office365_icon.png"))); // NOI18N
         jButton4.setText("Export");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         tblpoint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -593,6 +598,10 @@ public class point2 extends javax.swing.JInternalFrame {
     private void tblpointMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpointMouseClicked
        fillFormTable();
     }//GEN-LAST:event_tblpointMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        PointExcel.exportToExcel(tblpoint);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
