@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/java2/asss/src/assginmentjava3gd/list2.java</file>
-            <file>file:/D:/java2/asss/src/DAO/ListDAO.java</file>
-            <file>file:/D:/java2/asss/src/assginmentjava3gd/Rank2.java</file>
-            <file>file:/D:/java2/asss/src/DAO/PointDAO2.java</file>
-            <file>file:/D:/java2/asss/src/Excel/PointExcel.java</file>
-            <file>file:/D:/java2/asss/src/Excel/StudentExcel.java</file>
-            <file>file:/D:/java2/asss/src/DAO/ClassDAO2.java</file>
+            <file>file:/D:/MonHoc/SOF203/asss/src/assginmentjava3gd/Rank2.java</file>
+            <file>file:/D:/MonHoc/SOF203/asss/src/assginmentjava3gd/Major2.java</file>
+            <file>file:/D:/MonHoc/SOF203/asss/src/assginmentjava3gd/SendEmail.java</file>
+            <file>file:/D:/MonHoc/SOF203/asss/src/assginmentjava3gd/view.java</file>
+            <file>file:/D:/MonHoc/SOF203/asss/src/assginmentjava3gd/SubjectandMajor2.java</file>
+            <file>file:/D:/MonHoc/SOF203/asss/src/assginmentjava3gd/Dashboard2.java</file>
         </group>
     </open-files>
 </project-private>
