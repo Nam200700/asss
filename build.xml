@@ -69,27 +69,6 @@
     properties which you can use, check the target you are overriding in the
     nbproject/build-impl.xml file. 
 
-    -->
-    <!-- <project name="SendEmail" default="run" basedir=".">
     
-    <!-- Cấu hình thư mục chứa JAR -->
-    <path id="classpath">
-        <!-- Thêm các JAR trong thư mục lib -->
-        <fileset dir="lib">
-            <include name="*.jar"/>
-        </fileset>
-    </path>
-
-    <!-- Biên dịch mã nguồn -->
-    <target name="compile">
-        <javac srcdir="src" destdir="build" classpathref="classpath"/>
-    </target>
-
-    <!-- Chạy ứng dụng -->
-    <target name="run" depends="compile">
-        <java classname="SendEmail" classpathref="classpath" fork="true"/>
-    </target>
-
-</project> -->
 </project>
 
