@@ -171,7 +171,7 @@ public class SendEmail extends javax.swing.JInternalFrame {
             message.setText(txtMessage.getText());
             // Gửi email
             Transport.send(message);
-
+            JOptionPane.showMessageDialog(this, "Email đã được gửi thành công!");
             System.out.println("Email đã được gửi thành công!");
         } catch (MessagingException e) {
             e.printStackTrace();
