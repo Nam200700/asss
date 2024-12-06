@@ -34,9 +34,9 @@ public class PiechartDAO2 {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
 
         // Thông tin kết nối cơ sở dữ liệu
-        String url = "jdbc:mysql://localhost:3306/assjava3"; // Tên database của bạn
+        String url = "jdbc:mysql://127.0.0.1:3306/assjava3"; // Tên database của bạn
         String user = "root"; // Username của MySQL
-        String password = "18102007"; // Password của MySQL
+        String password = "0359910800"; // Password của MySQL
 
         try {
             // Kết nối cơ sở dữ liệu
